@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>Your Name</h1>
+    <p>Fullstack Developer — Portfolio</p>
+    <button id="fetchBtn">Test Backend</button>
+    <pre id="apiResult"></pre>
+  </header>
+
+  <section class="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li>Portfolio Website</li>
+      <li>Sample Project A</li>
+      <li>Sample Project B</li>
+    </ul>
+  </section>
+
+  <footer>
+    <small>© <span id="year"></span> Your Name</small>
+  </footer>
+
+  <script>
+    // Replace with your Render backend URL after deploy
+    const API_URL = "https://your-backend.onrender.com";
+
+    window.onload = () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      const btn = document.getElementById('fetchBtn');
+      const pre = document.getElementById('apiResult');
+
+      btn.addEventListener('click', async () => {
+        try {
+          const res = await fetch(API_URL + '/api/hello');
+          const json = await res.json();
+          pre.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          pre.textContent = 'Error: ' + err.message;
+        }
+      });
+    };
+  </script>
+  <script src="./app.js"></script>
+</body>
+</html>
